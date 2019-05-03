@@ -11,14 +11,17 @@ import org.testng.annotations.Test;
 public class Yandex {
 
     @Test
-    public void main1() {
+    public void main1() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://yandex.ru/");
+        driver.findElement(By.name("text")).clear();
         //driver.findElement(By.xpath("//*[@data-id = 'video']")).click();
-        driver.findElement(By.name("text")).sendKeys("1234");
+        driver.findElement(By.name("text")).sendKeys("какая валюта в Венгрии?");
         driver.findElement(By.name("text")).sendKeys(Keys.ENTER);
+        Thread.sleep(10000);
+        System.out.println(driver.findElement(By.name("text")).getAttribute("value"));
         driver.quit();
     }
 
